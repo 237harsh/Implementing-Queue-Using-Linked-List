@@ -1,0 +1,71 @@
+
+#include<stdio.h>
+
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node *next;
+    
+};
+ struct node *f=NULL;
+   struct node *r=NULL;
+   
+   void disp()
+   {
+      struct node *ptr=f;
+      while(ptr!=NULL)
+      {
+          printf("%d ",ptr->data);
+          ptr=ptr->next;
+          
+      }
+   }
+  void enqueue(int val)
+  {
+      struct node *new=(struct node*)malloc(sizeof(struct node));
+      if(new==NULL)printf("full");
+      else
+      {
+          new->data=val;
+          new->next=NULL;
+          if(f==NULL&&r==NULL)
+          {
+              f=new;
+              r=new;
+          }
+          else
+          {
+              r->next=new;
+              r=new;
+          }
+      }
+      
+  }
+  int dequeue()
+  {
+      int a=-1;
+      struct node *ptr=f;
+      if(f==NULL)
+      {
+          printf("empty");
+      }
+      else
+      {
+          a=ptr->data;
+          f=f->next;
+          free(ptr);
+      }
+      return a;
+      
+  }
+int main()
+{
+  enqueue(56);
+   enqueue(51);
+    enqueue(53);
+  disp();
+  printf("\n%d is deleted",dequeue());
+
+    return 0;
+}
